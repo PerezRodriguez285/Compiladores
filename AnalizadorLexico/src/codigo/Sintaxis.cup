@@ -1,0 +1,47 @@
+package codigo;
+
+import java_cup.runtime.Symbol;
+
+parser code
+{:
+    private Symbol s;
+    
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+}
+:};
+
+terminal Linea, Comillas, Int, If, Else, While, Igual, Suma, Resta, Multiplicacion, Division, 
+    Parentesis_abierto, Parentesis_cerrado, Llave_abierta, Llave_cerrada, Main, Punto_coma, Identificador,
+    Numero, ERROR;
+non terminal INICIO, SENTENCIA, DECLARACION, DECLARACION_FOR, IF, IF_ELSE,
+    WHILE, DO_WHILE, FOR, SENTENCIA_BOOLEANA, SENTENCIA_FOR;
+
+start with INICIO;
+
+INICIO ::= 
+    Int Main Parentesis_abierto Parentesis_cerrado Llave_abierta SENTENCIA Llave_cerrada |
+    Main Parentesis_abierto Parentesis_cerrado Llave_abierta SENTENCIA Llave_cerrada
+;
+SENTENCIA ::= 
+    Int Identificador Punto_coma | Int Identificador Igual Numero Punto_
+    SENTENCIA DECLARACION |
+    DECLARACION |
+    SENTENCIA IF | 
+    IF |
+    SENTENCIA IF_ELSE |
+    IF_ELSE |
+    SENTENCIA WHILE |
+    WHILE |
+    SENTENCIA DO_WHILE
+    DO_WHILE |
+    SENTENCIA FOR |
+    FOR
+;
+
+
+
